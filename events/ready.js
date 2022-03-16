@@ -1,8 +1,9 @@
  // import packages and utils
- import { REST } from "@discordjs/rest";
+import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
 import dirFlat from "../utils/dirFlat.js";
 import discord from "discord.js";
+import setPerms from "../utils/setPerms.js";
 
  // set up our on ready event
 export default {
@@ -24,7 +25,11 @@ export default {
             };
         })).then(async commands => {
             // register the commands with Discord 
-            commands.forEach(command => client.commands.set(command.data.name, command));
+            commands.forEach(command => {
+                if(command.permissions && !command.DMs) command.data.setDefaultPermission(false);
+
+                client.commands.set(command.data.name, command);
+            });
 
             const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
@@ -52,6 +57,10 @@ export default {
             });
 
             console.log("Commands loaded");
+
+            await setPerms(client);
+
+            console.log("Permissions set");
         });
     }
 }
