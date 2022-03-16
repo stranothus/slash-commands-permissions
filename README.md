@@ -17,10 +17,11 @@ And you can start running your Discord bot right away!
 
 To add a command, create a new file in the commands folder. You'll need to export an object of the following syntax:
 
-```json
+```
 {
     data: // slash command with the name, description, and any arguments you need
     DMs: // boolean for whether to allow the command to be used in Direct Messages or not
+    permissions: // discordjs permissions flag or valid permission bit value (non DM commands only)
     execute: // the function to execute for the slash command variant (has an interaction argument)
     executeText: // the function to execute for the text command variant (has the message object passed and the parsed command arguments)
 }
@@ -32,7 +33,7 @@ Look at commands/ping.js to get a simple idea!
 
 A Discord bot might need additional event listeners. This is a simple export
 
-```json
+```
 {
     type: // "on" or "once"
     name: // the event to listen for

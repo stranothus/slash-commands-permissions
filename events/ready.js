@@ -51,16 +51,14 @@ export default {
                             body: server.map(v => v.data.toJSON())
                         }
                     );
+
+                    await setPerms(guild);
                 } catch (error) {
                     console.error(error);
                 }
             });
 
             console.log("Commands loaded");
-
-            await setPerms(client);
-
-            console.log("Permissions set");
         });
     }
 }

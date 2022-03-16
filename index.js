@@ -10,7 +10,8 @@ dotenv.config();
 const client = new discord.Client({
     intents: [
         "GUILDS",
-        "GUILD_MESSAGES"
+        "GUILD_MESSAGES",
+        "GUILD_MEMBERS"
     ],
     partials: [
         "CHANNEL"
