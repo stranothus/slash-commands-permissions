@@ -23,11 +23,18 @@ async function setPerms(client) {
             if(!command.permissions || command.DMs) return;
 
             const roles = await guild.roles.fetch();
-            const permissions = roles.map(v => ({
-                id: v.id,
-                type: "ROLE",
-                permission: v.permissions.has(command.permissions)
-            })).filter(v => v.permission);
+            const permissions = [
+                ...roles.map(v => ({
+                    id: v.id,
+                    type: "ROLE",
+                    permission: v.permissions.has(command.permissions)
+                })).filter(v => v.permission),
+                {
+                    id: guild.ownerId,
+                    type: "USER",
+                    permission: true
+                }
+            ];
 
             guildCommand.permissions.add({ permissions });
         }));
