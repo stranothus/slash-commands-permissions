@@ -1,11 +1,13 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { Permissions } from "discord.js";
 
- export default {
+export default {
     data: new SlashCommandBuilder()
         .setName("adminflex")
         .setDescription("Flex your admin"),
+    // server only
     DMs: false,
+    // admin only
     permissions: Permissions.FLAGS.ADMINISTRATOR,
     execute: function(interaction) {
         interaction.reply("Admin swag");

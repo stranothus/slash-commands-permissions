@@ -4,6 +4,7 @@ export default {
     type: "on",
     name: "roleCreate",
     execute: async role => {
+        // update command permissions
         await setPerms(role.guild);
     }
 };

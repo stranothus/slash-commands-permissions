@@ -1,4 +1,4 @@
- // import package
+// import package
 import { SlashCommandBuilder } from "@discordjs/builders";
 
 export default {

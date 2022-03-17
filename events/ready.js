@@ -52,6 +52,7 @@ export default {
                         }
                     );
 
+                    // set command permissions
                     await setPerms(guild);
                 } catch (error) {
                     console.error(error);
