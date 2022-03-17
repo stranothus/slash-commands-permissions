@@ -1,7 +1,4 @@
-import { REST } from "@discordjs/rest";
-import { Routes } from "discord-api-types/v9";
 import dirFlat from "../utils/dirFlat.js";
-import discord from "discord.js";
 
 const commands = await Promise.all(dirFlat("./commands").map(async v => {
     const imported = await import("../" + v);
