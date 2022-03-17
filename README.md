@@ -9,7 +9,9 @@ Getting started is as easy four steps.
 1. Use `git clone https://github.com/stranothus/Discord-Template.git` in the parent directory. 
 2. cd into the resulting directory and run `npm install` to install node_modules. 
 3. Create your Discord application and create a bot for it. 
-4. Create a .env file with your bot token like `TOKEN="your token here"`
+4. Toggle server member and message content intents to on in the bot page on Discord. 
+5. Invite the bot to your server through the OAuth2 URL Generator. Make sure to click the bot, applications.commands, and send messages permissions as well as any others you're bot will need. 
+6. Create a .env file with your bot token like `TOKEN="your token here"`
 
 And you can start running your Discord bot right away!
 
