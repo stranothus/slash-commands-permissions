@@ -1,7 +1,7 @@
  // import packages
 import discord from "discord.js";
 import dotenv from "dotenv";
-import dirFlat from "./utils/dirFlat.js";
+import dirFlat from "dirflat";
 
  // load env variables
 dotenv.config();
@@ -19,8 +19,8 @@ const client = new discord.Client({
 });
 
  // load all events and set them up
-Promise.all(dirFlat("./events").map(async v => {
-    let imported = await import("./" + v);
+await Promise.all((await dirFlat("./events")).map(async v => {
+    const imported = await import(v);
 
     return {
         command: v.replace(/\.[^\.]+$/, ""),

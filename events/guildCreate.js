@@ -1,21 +1,22 @@
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
-import dirFlat from "../utils/dirFlat.js";
+import dirFlat from "dirflat";
+import setPerms from "../utils/setPerms.js";
+
+const commands = await Promise.all((await dirFlat("./commands")).map(async v => {
+    let imported = await import("../" + v);
+
+    return {
+        command: v.replace(/\.[^\.]+$/, ""),
+        file: v,
+        ...imported.default
+    };
+}));
 
 export default {
 	type: "on",
 	name: "guildCreate",
 	execute: async guild => {
-		const commands = await Promise.all(dirFlat("./commands").map(async v => {
-			let imported = await import("../" + v);
-
-			return {
-				command: v.replace(/\.[^\.]+$/, ""),
-				file: v,
-				...imported.default
-			};
-		}));
-
 		const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
 		const server = commands.filter(v => !v.DMs);
@@ -26,6 +27,8 @@ export default {
 					body: server.map(v => v.data.toJSON())
 				}
 			);
+
+            await setPerms(guild);
 		} catch (error) {
 			console.error(error);
 		}

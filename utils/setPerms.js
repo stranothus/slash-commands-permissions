@@ -1,7 +1,7 @@
-import dirFlat from "../utils/dirFlat.js";
+import dirFlat from "dirflat";
 
 // loads commands
-const commands = await Promise.all(dirFlat("./commands").map(async v => {
+const commands = await Promise.all((await dirFlat("./commands")).map(async v => {
     const imported = await import("../" + v);
 
     return {

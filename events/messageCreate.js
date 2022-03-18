@@ -1,11 +1,11 @@
  // import packages
- import dirFlat from "../utils/dirFlat.js";
+ import dirFlat from "dirflat";
 
  // the default prefix
 const prefix = "!";
 
  // load commands
-const commands = Promise.all(dirFlat("./commands").map(async v => {
+const commands = Promise.all((await dirFlat("./commands")).map(async v => {
     const imported = await import("../" + v);
 
     return {

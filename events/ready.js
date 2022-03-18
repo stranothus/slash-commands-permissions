@@ -1,7 +1,7 @@
  // import packages and utils
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
-import dirFlat from "../utils/dirFlat.js";
+import dirFlat from "dirflat";
 import discord from "discord.js";
 import setPerms from "../utils/setPerms.js";
 
@@ -9,13 +9,13 @@ import setPerms from "../utils/setPerms.js";
 export default {
     type: "once",
     name: "ready",
-    execute: client => {
+    execute: async client => {
         console.log("Logged in as " + client.user.tag);
 
         client.commands = new discord.Collection();
         
         // load all the commands
-        Promise.all(dirFlat("./commands").map(async v => {
+        Promise.all((await dirFlat("./commands")).map(async v => {
             const imported = await import("../" + v);
         
             return {
