@@ -26,7 +26,7 @@ export default {
         })).then(async commands => {
             // register the commands with Discord 
             commands.forEach(command => {
-                if(command.permissions && !command.DMs) command.data.setDefaultPermission(false);
+                if((command.permissions || command.notpermissions) && !command.DMs) command.data.setDefaultPermission(false);
 
                 client.commands.set(command.data.name, command);
             });
