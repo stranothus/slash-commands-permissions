@@ -8,7 +8,7 @@ export default {
     // server only
     DMs: false,
     // nonadmin only
-    notpermissions: Permissions.FLAGS.ADMINISTRATOR,
+    permissions: permissions => !permissions.has(Permissions.FLAGS.ADMINISTRATOR),
     execute: function(interaction) {
         interaction.reply("Admins suck");
     },

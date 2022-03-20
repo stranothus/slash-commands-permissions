@@ -8,7 +8,7 @@ export default {
     // server only
     DMs: false,
     // admin only
-    permissions: Permissions.FLAGS.ADMINISTRATOR,
+    permissions: permissions => permissions.has(Permissions.FLAGS.ADMINISTRATOR),
     execute: function(interaction) {
         interaction.reply("Admin swag");
     },

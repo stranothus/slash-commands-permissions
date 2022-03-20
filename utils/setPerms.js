@@ -20,7 +20,7 @@ async function setPerms(guild) {
         const command = commands.filter(v => v.data.name === guildCommand.name)[0];
 
         // return if the command is intended for DMs or has no permissions
-        if(!(command.permissions && command.notpermissions) || command.DMs) return;
+        if(!command.permissions || command.DMs) return;
 
         // fetch roles and members
         const roles = await guild.roles.fetch();
@@ -29,12 +29,12 @@ async function setPerms(guild) {
             ...roles.map(v => ({
                 id: v.id,
                 type: "ROLE",
-                permission: command.permissions ? v.permissions.has(command.permissions) : !v.permissions.has(command.notpermissions) // allow roles with matching permissions to use the command
+                permission: command.permissions(v.permissions) // allow roles with matching permissions to use the command
             })),
             {
                 id: guild.ownerId,
                 type: "USER",
-                permission: !!command.permissions
+                permission: command.permissions((await guild.members.fetch(guild.ownerId)).permissions)
             }
         ];
 
